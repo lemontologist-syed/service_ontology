@@ -1,0 +1,659 @@
+@prefix so: <https://lemontologist-syed.github.io/service_ontology/#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://lemontologist-syed.github.io/service_ontology/>
+    a owl:Ontology ;
+    rdfs:label "Service ontology"@en ;
+    owl:versionInfo "Version 1.0"@en ;
+    rdfs:comment "A service ontology for defining goal-driven service packages, reusable resources, service-executing agents, and the evaluation of societal value outcomes and technical performance through KVs, KVIs, and KPIs. This file represents Version 1.0 of the ontology."@en .
+
+#################################################################
+# Main classes
+#################################################################
+
+so:Goal
+    a owl:Class ;
+    rdfs:label "Goal"@en ;
+    rdfs:comment "Represents an intended societal or technical objective evaluated through target thresholds and fulfillment status."@en .
+
+so:Resource
+    a owl:Class ;
+    rdfs:label "Resource"@en ;
+    rdfs:comment "Represents a digital or informational resource used in service-package creation, execution, or orchestration."@en .
+
+so:ServiceExecutingAgent
+    a owl:Class ;
+    rdfs:label "Service executing agent"@en ;
+    rdfs:comment "Represents an agent responsible for either service execution or service orchestration. The agent is classified as either a technical service execution agent or a human agent through datatype properties."@en .
+
+so:ServicePackage
+    a owl:Class ;
+    rdfs:label "Service package"@en ;
+    rdfs:comment "Represents an orchestrated configuration of goals, resources, enabler information, use-case information, stakeholder information, and normative frameworks."@en .
+
+#################################################################
+# Goal hierarchy
+#################################################################
+
+so:KeyValue
+    a owl:Class ;
+    rdfs:subClassOf so:Goal ;
+    rdfs:label "Key value"@en ;
+    rdfs:comment "A stakeholder-agreed principle of societal, economic, or environmental importance that motivates development decisions and defines a domain of measurable benefit or detriment."@en .
+
+so:KeyValueIndicator
+    a owl:Class ;
+    rdfs:subClassOf so:Goal ;
+    rdfs:label "Key value indicator"@en ;
+    rdfs:comment "A qualitative or quantitative metric, scoped to a specific use case and scenario, that gauges gains or detriments associated with system usage or its technical realization."@en .
+
+so:KeyPerformanceIndicator
+    a owl:Class ;
+    rdfs:subClassOf so:Goal ;
+    rdfs:label "Key performance indicator"@en ;
+    rdfs:comment "A qualitative or quantitative metric used to evaluate whether technical or operational performance satisfies a defined threshold."@en .
+
+so:UseCaseKeyValue
+    a owl:Class ;
+    rdfs:subClassOf so:KeyValue ;
+    rdfs:label "Use-case key value"@en ;
+    rdfs:comment "A key value affected by the implementation, operation, or proliferation of a specific service use case."@en .
+
+so:EnablerKeyValue
+    a owl:Class ;
+    rdfs:subClassOf so:KeyValue ;
+    rdfs:label "Enabler key value"@en ;
+    rdfs:comment "A key value positively or negatively affected by the technical or human enablers supporting a service package."@en .
+
+so:SocietalKeyValue
+    a owl:Class ;
+    rdfs:subClassOf so:UseCaseKeyValue ;
+    rdfs:label "Societal key value"@en ;
+    rdfs:comment "A use-case key value concerning collective societal outcomes and public beneficiaries."@en .
+
+so:IndividualKeyValue
+    a owl:Class ;
+    rdfs:subClassOf so:UseCaseKeyValue ;
+    rdfs:label "Individual key value"@en ;
+    rdfs:comment "A use-case key value concerning outcomes experienced by individual actors or user groups."@en .
+
+so:OrganizationalKeyValue
+    a owl:Class ;
+    rdfs:subClassOf so:UseCaseKeyValue ;
+    rdfs:label "Organizational key value"@en ;
+    rdfs:comment "A use-case key value concerning outcomes experienced by organizations."@en .
+
+so:UseCaseKVI
+    a owl:Class ;
+    rdfs:subClassOf so:KeyValueIndicator ;
+    rdfs:label "Use-case KVI"@en ;
+    rdfs:comment "A KVI that evaluates the value outcome associated with the operation or proliferation of a specific use case."@en .
+
+so:EnablerKVI
+    a owl:Class ;
+    rdfs:subClassOf so:KeyValueIndicator ;
+    rdfs:label "Enabler KVI"@en ;
+    rdfs:comment "A KVI that evaluates the positive or negative value impacts caused by service enablers."@en .
+
+so:EventKVI
+    a owl:Class ;
+    rdfs:subClassOf so:UseCaseKVI ;
+    rdfs:label "Event KVI"@en ;
+    rdfs:comment "A use-case KVI that evaluates the occurrence, frequency, severity, or change of value-relevant events."@en .
+
+so:ResourceKVI
+    a owl:Class ;
+    rdfs:subClassOf so:UseCaseKVI ;
+    rdfs:label "Resource KVI"@en ;
+    rdfs:comment "A use-case KVI that evaluates the availability, quantity, quality, condition, or utilization of resources."@en .
+
+so:ProcessKVI
+    a owl:Class ;
+    rdfs:subClassOf so:UseCaseKVI ;
+    rdfs:label "Process KVI"@en ;
+    rdfs:comment "A use-case KVI that evaluates the effectiveness, efficiency, reliability, or inclusiveness of a process."@en .
+
+so:CoverageKVI
+    a owl:Class ;
+    rdfs:subClassOf so:UseCaseKVI ;
+    rdfs:label "Coverage KVI"@en ;
+    rdfs:comment "A use-case KVI that evaluates the extent to which a service, benefit, or detriment reaches a target population, area, or stakeholder group."@en .
+
+#################################################################
+# Service-executing agent classification
+#################################################################
+
+# ServiceExecutingAgent has no subclasses. Its function and actor category
+# are recorded by so:serviceExecutingAgentRole and so:serviceExecutingAgentType.
+
+#################################################################
+# Resource hierarchy
+#################################################################
+
+so:VirtualModel
+    a owl:Class ;
+    rdfs:subClassOf so:Resource ;
+    rdfs:label "Virtual model"@en ;
+    rdfs:comment "A digital representation used to describe, simulate, predict, or calibrate a real or conceptual system."@en .
+
+so:Tool
+    a owl:Class ;
+    rdfs:subClassOf so:Resource ;
+    rdfs:label "Tool"@en ;
+    rdfs:comment "A software component or platform that performs configured tasks in support of service-package creation or execution."@en .
+
+so:AIAgent
+    a owl:Class ;
+    rdfs:subClassOf so:Resource ;
+    rdfs:label "AI agent"@en ;
+    rdfs:comment "An autonomous or semi-autonomous computational resource that uses artificial intelligence to perceive, reason, decide, and act toward predefined objectives."@en .
+
+so:UseCaseData
+    a owl:Class ;
+    rdfs:subClassOf so:Resource ;
+    rdfs:label "Use-case data"@en ;
+    rdfs:comment "Structured or unstructured records of measured, observed, simulated, or derived values associated with a defined use case."@en .
+
+so:PhysicalModel
+    a owl:Class ;
+    rdfs:subClassOf so:VirtualModel ;
+    rdfs:label "Physical model"@en ;
+    rdfs:comment "A model that represents physical processes or system dynamics through scientific principles and physical equations."@en .
+
+so:BehaviorModel
+    a owl:Class ;
+    rdfs:subClassOf so:VirtualModel ;
+    rdfs:label "Behavior model"@en ;
+    rdfs:comment "A model that represents or predicts the behavior of occupants, assets, organizations, or systems."@en .
+
+so:RuleModel
+    a owl:Class ;
+    rdfs:subClassOf so:VirtualModel ;
+    rdfs:label "Rule model"@en ;
+    rdfs:comment "A model that represents logical, regulatory, operational, or decision rules."@en .
+
+so:GeometricModel
+    a owl:Class ;
+    rdfs:subClassOf so:VirtualModel ;
+    rdfs:label "Geometric model"@en ;
+    rdfs:comment "A model that represents spatial form, dimensions, topology, location, and spatial relationships."@en .
+
+so:UserInterface
+    a owl:Class ;
+    rdfs:subClassOf so:Tool ;
+    rdfs:label "User interface"@en ;
+    rdfs:comment "A tool that enables users or stakeholders to provide inputs, inspect information, configure services, and interact with service functions."@en .
+
+so:UseCaseTool
+    a owl:Class ;
+    rdfs:subClassOf so:Tool ;
+    rdfs:label "Use-case tool"@en ;
+    rdfs:comment "A tool configured to perform a specific analytical, simulation, decision-support, visualization, or operational task required by a use case."@en .
+
+#################################################################
+# Object properties
+#################################################################
+
+so:realizesGoal
+    a owl:ObjectProperty ;
+    owl:inverseOf so:isRealizedBy ;
+    rdfs:domain so:ServicePackage ;
+    rdfs:range so:Goal ;
+    rdfs:label "realizes goal"@en ;
+    rdfs:comment "Links a service package to the goal it is intended to realize."@en .
+
+so:isRealizedBy
+    a owl:ObjectProperty ;
+    rdfs:domain so:Goal ;
+    rdfs:range so:ServicePackage ;
+    rdfs:label "is realized by"@en ;
+    rdfs:comment "Links a goal to the service package intended to realize it."@en .
+
+so:uses
+    a owl:ObjectProperty ;
+    owl:inverseOf so:isUsedBy ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( so:ServicePackage so:Resource )
+    ] ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf ( so:Resource so:ServiceExecutingAgent )
+    ] ;
+    rdfs:label "uses"@en ;
+    rdfs:comment "Represents the use of a resource or service-executing agent during service creation, execution, or orchestration."@en .
+
+so:isUsedBy
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( so:Resource so:ServiceExecutingAgent )
+    ] ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf ( so:ServicePackage so:Resource )
+    ] ;
+    rdfs:label "is used by"@en ;
+    rdfs:comment "Inverse of uses."@en .
+
+so:isExecutedBy
+    a owl:ObjectProperty ;
+    owl:inverseOf so:executesServicePackage ;
+    rdfs:domain so:ServicePackage ;
+    rdfs:range so:ServiceExecutingAgent ;
+    rdfs:label "is executed by"@en ;
+    rdfs:comment "Links a service package to the agent responsible for its execution or orchestration."@en .
+
+so:executesServicePackage
+    a owl:ObjectProperty ;
+    rdfs:domain so:ServiceExecutingAgent ;
+    rdfs:range so:ServicePackage ;
+    rdfs:label "executes service package"@en ;
+    rdfs:comment "Links a service-executing agent to the service package it executes or orchestrates."@en .
+
+so:sharesRule
+    a owl:ObjectProperty ;
+    owl:inverseOf so:receivesRule ;
+    rdfs:domain so:Resource ;
+    rdfs:range so:Goal ;
+    rdfs:label "shares rule"@en ;
+    rdfs:comment "Represents the transfer of a resource-derived rule to the goal layer."@en .
+
+so:receivesRule
+    a owl:ObjectProperty ;
+    rdfs:domain so:Goal ;
+    rdfs:range so:Resource ;
+    rdfs:label "receives rule"@en ;
+    rdfs:comment "Represents the reception of a rule from the resource layer."@en .
+
+so:hasPart
+    a owl:ObjectProperty, owl:TransitiveProperty ;
+    owl:inverseOf so:isPartOf ;
+    rdfs:label "has part"@en ;
+    rdfs:comment "Links an instance of a composite ontology class to an instance of one of its component classes. Class-specific applicability is defined through OWL restrictions rather than a single global domain and range."@en .
+
+so:isPartOf
+    a owl:ObjectProperty, owl:TransitiveProperty ;
+    owl:inverseOf so:hasPart ;
+    rdfs:label "is part of"@en ;
+    rdfs:comment "Links a component instance to the composite instance that contains it; inverse of has part."@en .
+
+so:hasKeyValueIndication
+    a owl:ObjectProperty ;
+    owl:inverseOf so:isKeyValueIndicator ;
+    rdfs:domain so:KeyValue ;
+    rdfs:range so:KeyValueIndicator ;
+    rdfs:label "has key value indication"@en ;
+    rdfs:comment "Links a key value to the indicator used to evaluate its outcome."@en .
+
+so:isKeyValueIndicator
+    a owl:ObjectProperty ;
+    rdfs:domain so:KeyValueIndicator ;
+    rdfs:range so:KeyValue ;
+    rdfs:label "is key value indicator"@en ;
+    rdfs:comment "Links a key value indicator to the key value whose outcome it evaluates."@en .
+
+so:sharesData
+    a owl:ObjectProperty ;
+    owl:inverseOf so:receivesData ;
+    rdfs:domain so:UseCaseData ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf ( so:VirtualModel so:Tool so:AIAgent )
+    ] ;
+    rdfs:label "shares data"@en ;
+    rdfs:comment "Represents the transfer of use-case data to virtual models, tools, or AI agents."@en .
+
+so:receivesData
+    a owl:ObjectProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( so:VirtualModel so:Tool so:AIAgent )
+    ] ;
+    rdfs:range so:UseCaseData ;
+    rdfs:label "receives data"@en ;
+    rdfs:comment "Represents the reception of use-case data by virtual models, tools, or AI agents."@en .
+
+#################################################################
+# Composition restrictions
+#################################################################
+
+so:Goal
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:KeyValue ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:KeyValueIndicator ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:KeyPerformanceIndicator ] .
+
+so:KeyValue
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:UseCaseKeyValue ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:EnablerKeyValue ] .
+
+so:KeyValueIndicator
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:UseCaseKVI ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:EnablerKVI ] .
+
+so:UseCaseKeyValue
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:SocietalKeyValue ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:IndividualKeyValue ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:OrganizationalKeyValue ] .
+
+so:UseCaseKVI
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:EventKVI ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:ResourceKVI ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:ProcessKVI ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:CoverageKVI ] .
+
+
+so:Resource
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:VirtualModel ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:Tool ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:AIAgent ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:UseCaseData ] .
+
+so:VirtualModel
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:PhysicalModel ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:BehaviorModel ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:RuleModel ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:GeometricModel ] .
+
+so:Tool
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:UserInterface ],
+        [ a owl:Restriction ; owl:onProperty so:hasPart ; owl:someValuesFrom so:UseCaseTool ] .
+
+#################################################################
+# Data properties for main classes
+#################################################################
+
+so:goalName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:Goal ;
+    rdfs:range xsd:string ;
+    rdfs:label "goal name"@en .
+
+so:targetThreshold
+    a owl:DatatypeProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (
+            so:Goal
+            so:KeyPerformanceIndicator
+            so:UseCaseKVI
+            so:EnablerKVI
+            so:EventKVI
+            so:ResourceKVI
+            so:ProcessKVI
+            so:CoverageKVI
+        )
+    ] ;
+    rdfs:range xsd:string ;
+    rdfs:label "target threshold"@en .
+
+so:fulfillmentStatus
+    a owl:DatatypeProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (
+            so:Goal
+            so:KeyPerformanceIndicator
+            so:UseCaseKVI
+            so:EnablerKVI
+            so:EventKVI
+            so:ResourceKVI
+            so:ProcessKVI
+            so:CoverageKVI
+        )
+    ] ;
+    rdfs:range xsd:string ;
+    rdfs:label "fulfillment status"@en .
+
+so:resourceName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:Resource ;
+    rdfs:range xsd:string ;
+    rdfs:label "resource name"@en .
+
+so:serviceExecutingAgentName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServiceExecutingAgent ;
+    rdfs:range xsd:string ;
+    rdfs:label "service-executing agent name"@en .
+
+so:serviceExecutingAgentType
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServiceExecutingAgent ;
+    rdfs:range xsd:string ;
+    rdfs:label "service-executing agent type"@en ;
+    rdfs:comment "Specifies the actor type of a service-executing agent. The permitted values are technical service execution agent and human agent."@en .
+
+so:serviceExecutingAgentRole
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServiceExecutingAgent ;
+    rdfs:range xsd:string ;
+    rdfs:label "service-executing agent role"@en ;
+    rdfs:comment "Specifies the functional role of a service-executing agent. The permitted values are service execution and orchestration."@en .
+
+so:agentInformation
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServiceExecutingAgent ;
+    rdfs:range xsd:string ;
+    rdfs:label "agent information"@en .
+
+so:executionTime
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServiceExecutingAgent ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "execution time"@en .
+
+so:executionLatency
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServiceExecutingAgent ;
+    rdfs:range xsd:duration ;
+    rdfs:label "execution latency"@en .
+
+so:servicePackageName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServicePackage ;
+    rdfs:range xsd:string ;
+    rdfs:label "service package name"@en .
+
+so:enablerInformation
+    a owl:DatatypeProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( so:ServicePackage so:EnablerKeyValue so:EnablerKVI )
+    ] ;
+    rdfs:range xsd:string ;
+    rdfs:label "enabler information"@en .
+
+so:useCaseInformation
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServicePackage ;
+    rdfs:range xsd:string ;
+    rdfs:label "use-case information"@en .
+
+so:stakeholderInformation
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServicePackage ;
+    rdfs:range xsd:string ;
+    rdfs:label "stakeholder information"@en .
+
+so:normativeFrameworks
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ServicePackage ;
+    rdfs:range xsd:string ;
+    rdfs:label "normative frameworks"@en .
+
+#################################################################
+# Data properties for Goal subclasses
+#################################################################
+
+so:keyValueName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:KeyValue ;
+    rdfs:range xsd:string ;
+    rdfs:label "key value name"@en .
+
+so:keyValueIndicatorName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:KeyValueIndicator ;
+    rdfs:range xsd:string ;
+    rdfs:label "key value indicator name"@en .
+
+so:keyPerformanceIndicatorName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:KeyPerformanceIndicator ;
+    rdfs:range xsd:string ;
+    rdfs:label "key performance indicator name"@en .
+
+so:performanceMethod
+    a owl:DatatypeProperty ;
+    rdfs:domain so:KeyPerformanceIndicator ;
+    rdfs:range xsd:string ;
+    rdfs:label "performance method"@en .
+
+so:useCaseName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:UseCaseKeyValue ;
+    rdfs:range xsd:string ;
+    rdfs:label "use-case name"@en .
+
+so:keyValueOutcome
+    a owl:DatatypeProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( so:UseCaseKeyValue so:EnablerKeyValue )
+    ] ;
+    rdfs:range xsd:string ;
+    rdfs:label "key value outcome"@en .
+
+so:enablerKeyValueName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:EnablerKeyValue ;
+    rdfs:range xsd:string ;
+    rdfs:label "enabler key value name"@en .
+
+so:societalActorMetadata
+    a owl:DatatypeProperty ;
+    rdfs:domain so:SocietalKeyValue ;
+    rdfs:range xsd:string ;
+    rdfs:label "societal actor metadata"@en .
+
+so:individualActorMetadata
+    a owl:DatatypeProperty ;
+    rdfs:domain so:IndividualKeyValue ;
+    rdfs:range xsd:string ;
+    rdfs:label "individual actor metadata"@en .
+
+so:organizationMetadata
+    a owl:DatatypeProperty ;
+    rdfs:domain so:OrganizationalKeyValue ;
+    rdfs:range xsd:string ;
+    rdfs:label "organization metadata"@en .
+
+so:useCaseKVIName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:UseCaseKVI ;
+    rdfs:range xsd:string ;
+    rdfs:label "use-case KVI name"@en .
+
+so:enablerKVIName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:EnablerKVI ;
+    rdfs:range xsd:string ;
+    rdfs:label "enabler KVI name"@en .
+
+so:eventKVIName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:EventKVI ;
+    rdfs:range xsd:string ;
+    rdfs:label "event KVI name"@en .
+
+so:resourceKVIName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ResourceKVI ;
+    rdfs:range xsd:string ;
+    rdfs:label "resource KVI name"@en .
+
+so:processKVIName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:ProcessKVI ;
+    rdfs:range xsd:string ;
+    rdfs:label "process KVI name"@en .
+
+so:coverageKVIName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:CoverageKVI ;
+    rdfs:range xsd:string ;
+    rdfs:label "coverage KVI name"@en .
+
+so:measurementMethod
+    a owl:DatatypeProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (
+            so:UseCaseKVI
+            so:EnablerKVI
+            so:EventKVI
+            so:ResourceKVI
+            so:ProcessKVI
+            so:CoverageKVI
+        )
+    ] ;
+    rdfs:range xsd:string ;
+    rdfs:label "measurement method"@en .
+
+#################################################################
+# Data properties for Resource subclasses
+#################################################################
+
+so:modelName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:VirtualModel ;
+    rdfs:range xsd:string ;
+    rdfs:label "model name"@en .
+
+so:modelMethod
+    a owl:DatatypeProperty ;
+    rdfs:domain so:VirtualModel ;
+    rdfs:range xsd:string ;
+    rdfs:label "model method"@en .
+
+so:modelMetadata
+    a owl:DatatypeProperty ;
+    rdfs:domain so:VirtualModel ;
+    rdfs:range xsd:string ;
+    rdfs:label "model metadata"@en .
+
+so:toolName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:Tool ;
+    rdfs:range xsd:string ;
+    rdfs:label "tool name"@en .
+
+so:toolParameters
+    a owl:DatatypeProperty ;
+    rdfs:domain so:Tool ;
+    rdfs:range xsd:string ;
+    rdfs:label "tool parameters"@en .
+
+so:aiAgentName
+    a owl:DatatypeProperty ;
+    rdfs:domain so:AIAgent ;
+    rdfs:range xsd:string ;
+    rdfs:label "AI agent name"@en .
+
+so:aiAgentMetadata
+    a owl:DatatypeProperty ;
+    rdfs:domain so:AIAgent ;
+    rdfs:range xsd:string ;
+    rdfs:label "AI agent metadata"@en .
